@@ -1,0 +1,20 @@
+@import url(create.css);
+
+.d-flex{
+    gap: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.green-text {
+    color: green;
+}
+
+.red-text {
+    color: red;
+}
+
+
+

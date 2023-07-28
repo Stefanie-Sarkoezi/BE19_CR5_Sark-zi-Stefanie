@@ -27,12 +27,12 @@
         while($rowAnimal = mysqli_fetch_assoc($resultAnimals)){
             $layout .= "<div>
             <div class='card gap-3 mt-5 mb-5 shadow' style='width: 18rem;'>
-                <img src='../images/{$rowAnimal["picture"]}' class='card-img-top' alt='...' style='height: 30vh;'>
-                <div class='card-body'>
-                <h4 class='card-title mb-4 text-center d-flex align-items-center justify-content-center' style='height: 8vh;' >{$rowAnimal["name"]}</h4>
+                <img src='../images/{$rowAnimal["picture"]}' class='card-img-top' alt='...' style='width: 100%;'>
+                <div class='card-body '>
+                <h3 class='card-title text-center d-flex align-items-center justify-content-center' style='height: 8vh;' >{$rowAnimal["name"]}</h3>
                 <hr class='TitleHR'>
-                <p class='card-text mt-5'><b>Age:</b> <br> {$rowAnimal["age"]}</p>
-                <p class='card-text mb-5'><b>Size:</b><br> {$rowAnimal["size"]}</p>
+                <p class='card-text ps-3 mt-4'><b>Age:</b> <br> {$rowAnimal["age"]} Years</p>
+                <p class='card-text mb-4 ps-3'><b>Size:</b><br> {$rowAnimal["size"]} cm</p>
                 <div class='buttons text-center'> 
                     <a href='details.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Details</a>
                     <a href='adopt.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Take me home</a>
@@ -65,27 +65,32 @@
             </a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" >Home</a>
+                    <a class="nav-link active" aria-current="page" href="home.php" >Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="senior.php?id=<?= $row["id"] ?>">Our Seniors</a>
+                    <a class="nav-link" href="senior.php">Our Seniors</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php?logout">Logout</a >
                 </li>
             </ul>
-            <a class="navbar-brand" href="update.php">
-                <img src="../images/<?= $row["picture"] ?>" alt="user pic" width="30" height="24">
+            <a class="navbar-brand" href="update.php?id=<?=$row["id"]?>">
+              <span class="text-black-50 fs-6"><?= $row["email"] ?></span>
+            </a>
+            <a class="navbar-brand" href="update.php?id=<?=$row["id"]?>">
+                <img src="../images/<?= $row["picture"] ?>" class="object-fit-contain" alt="user pic" width="70" height="70">
             </a>
         </div>
     </nav>
-    <h2 class="text-center">Welcome <?= $row[ "first_name"] . " " . $row[ "last_name"] ?></h2>
+    
+    <h2 class="text-center mt-5">Welcome <?= $row["first_name"]?>!</h2>
 
     <div class="container">
-        <div class="row">
+        <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
             <?= $layout ?>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,14 +1,12 @@
 <?php
    session_start();
 
-   require_once  "db_connect.php";
-   require_once  "file_upload.php";
+   require_once "db_connect.php";
+   require_once "file_upload.php";
 
-   $id = $_GET["id"]; // taking the value of id from the URL
-
+   $id = $_GET["id"]; 
    $sql = "SELECT * FROM users WHERE id = $id";
    $result = mysqli_query($connect, $sql);
-
    $row = mysqli_fetch_assoc($result);
 
    $backBtn = "home.php";
@@ -18,30 +16,30 @@
    }
 
    if (isset($_POST["update"])){
-       $fname = $_POST["fname"];
-       $lname = $_POST["lname"];
+       $fname = $_POST["fist_name"];
+       $lname = $_POST["last_name"];
        $email = $_POST["email"];
-       $date_of_birth = $_POST["date_of_birth"];
+       $address = $_POST["address"];
+       $phone = $_POST["phone"];
        $picture = fileUpload($_FILES["picture"]);
-       /* checking if a picture has been selected in the input for the image */
+       
        if($_FILES["picture"]["error"] == 0){
-            /* checking if the picture name of the product is not avatar.png to remove it from pictures folder */
             if($row["picture"] != "avatar.png"){
-               unlink("pictures/$row[picture]" );
+               unlink("../images/$row[picture]" );
            }
-           $sql = "UPDATE users SET first_name = '$fname', last_name = '$lname', picture = '$picture[0]', date_of_birth = '$date_of_birth', email = '$email' WHERE id = {$id}" ;
+           $sql = "UPDATE `users` SET `first_name` = '$fname', `last_name` = '$lname', `picture` = '$picture[0]', address = '$address', `phone` = '$phone', `email` = '$email' WHERE id = {$id}";
        } else {
-           $sql = "UPDATE users SET first_name = '$fname', last_name = '$lname', date_of_birth = '$date_of_birth', email = '$email' WHERE id = {$id}" ;
+           $sql = "UPDATE `users` SET `first_name` = '$fname', `last_name` = '$lname', address = '$address', `phone` = '$phone', `email` = '$email' WHERE id = {$id}";
        }
 
     if (mysqli_query($connect, $sql)){
         echo  "<div class='alert alert-success' role='alert'>
-       user has been updated, {$picture[1]}
+       Your user information has been updated. {$picture[1]}
      </div>" ;
-     header( "refresh: 3; url=$backBtn" );
+     header( "refresh: 5; url=$backBtn" );
    } else  {
         echo   "<div class='alert alert-danger' role='alert'>
-       error found, {$picture[1]}
+       Oops! Something went wrong. {$picture[1]}
      </div>" ;
    }
 }
@@ -58,30 +56,34 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="text-center">Edit profile </h1>
+            <h1 class="text-center">Edit profile: </h1>
             <form method="post" autocomplete="off" enctype="multipart/form-data">
                 <div class="mb-3 mt-3" >
-                    <label for="fname" class="form-label"> First name </label>
-                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First name" value="<?= $row["first_name"] ?> ">
+                    <label for="first_name" class="form-label"> First name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" value="<?= $row["first_name"] ?> ">
                 </div>
                 <div class="mb-3">
-                    <label for="lname" class="form-label">Last name </label>
-                    <input type="text" class="form-control"   id="lname" name="lname" placeholder="Last name" value="<?= $row["last_name"] ?> ">
+                    <label for="last_name" class="form-label">Last name:</label>
+                    <input type="text" class="form-control"   id="last_name" name="last_name" placeholder="Last name" value="<?= $row["last_name"] ?> ">
                 </div>
                 <div class="mb-3">
-                    <label for="date" class="form-label">Date of birth </label>
-                    <input type="date" class="form-control" id="date" name="date_of_birth" value="<?= $row["date_of_birth"] ?>">
+                    <label for="address" class="form-label">Adress:</label>
+                    <input type="text" class="form-control" id="address" name="address" value="<?= $row["address"] ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="picture" class="form-label">Profile picture </label>
-                    <input type="file" class="form-control" id="picture" name="picture">
+                    <label for="phone" class="form-label">Phone Number:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="<?= $row["phone"] ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address </label>
+                    <label for="email" class="form-label">Email address:</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?= $row["email"] ?> ">
                 </div>
-                <button name="update" type="submit" class="btn btn-warning" >Update profile </button>
-                <a href="<?= $backBtn ?>" class="btn btn-secondary" >Back</a>
+                <div class="mb-3">
+                    <label for="picture" class="form-label">Profile picture:</label>
+                    <input type="file" class="form-control" id="picture" name="picture">
+                </div>
+                <button name="update" type="submit" class="btn btn-warning" >Update profile</button>
+                <a href="<?= $backBtn ?>" class="btn btn-secondary">Back</a>
             </form>
         </div>
      

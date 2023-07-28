@@ -52,27 +52,6 @@
 
 </head>
 <body>
-   <nav class="navbar navbar-expand-lg bg-body-tertiary" >
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="pictures/<?= $row["picture"] ?>" alt="user pic" width="30" height="24">
-            </a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" >Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="products/index.php" >Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="update.php?id=<?= $row["id"] ?>">edit</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php?logout">Logout</a >
-                </li>
-            </ul>
-        </div>
-    </nav>
     <h2 class="text-center">Welcome <?= $row[ "first_name"] . " " . $row[ "last_name"] ?></h2>
     <div class="container">
         <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
