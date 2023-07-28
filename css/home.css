@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    font-size:larger;
+}
+.headerImage {
+    background-image: url("../images/hero2.png");
+    width: 100%;
+    height: 35vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-items: center;
+    background-size: cover;
+    justify-content: center;
+    position: relative;
+    display: flex;
+  }
+.card-title {
+    align-items: center;
+}
+.TitleHR {
+    color: #fda000; 
+}
+.MLLine {
+    margin-left: 45%;
+    color: #fda000;
+    opacity: 100%;
+}
+#publisherBtn {
+    text-decoration: none;
+    color: black;
+}
+

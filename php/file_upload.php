@@ -4,7 +4,7 @@
         if($picture["error"] == 4){ 
            $pictureName = "avatar.png"; 
 
-            if($source == "product"){
+            if($source == "animal"){
                 $pictureName = "pet-avatar.png";
             }
 
@@ -19,7 +19,7 @@
            $pictureName = uniqid("" ). "." . $ext; 
            $destination = "../images/{$pictureName}" ; 
 
-            if($source == "product"){
+            if($source == "animal"){
                 $destination = "../images/{$pictureName}" ;
             }
 
