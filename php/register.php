@@ -97,9 +97,10 @@
             $sql = "INSERT INTO `users`( `first_name`, `last_name`, `password`, `address`, `phone`, `email`, `picture`) VALUES ('$fname','$lname','$password','$address', '$phone', '$email','$picture[0]') ";
 
             if(mysqli_query($connect, $sql)){
-                echo   "<div class='alert alert-success'>
-               <p>New account has been created, $picture[1]</p>
-                </div>" ;
+                echo "<div class='alert alert-success'>
+                    <p>New account has been created. $picture[1]</p>
+                    </div>" ;
+                header("refresh: 3; url = login.php");
                 } else  {
                         echo   "<div class='alert alert-danger'>
                     <p>Oops! Something went wrong.</p>
@@ -186,7 +187,7 @@
                     <input type="password" class="form-control" id="password" name="password">
                     <span class="text-danger"><?= $passError ?></span>
                 </div>
-                <button name="sign-up mb-5" type="submit" class="btn text-white" id="upBtn" >Create account</button>
+                <button name="sign-up" type="submit" class="btn mb-5 text-white" id="upBtn">Create account</button>
              
                 <span class="ms-3 mb-5 ">You already have an account? <a href="login.php">Sign in here</a></span>
             </form>

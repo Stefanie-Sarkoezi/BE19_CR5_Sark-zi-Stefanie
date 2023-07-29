@@ -22,9 +22,19 @@
     $resultAnimals = mysqli_query($connect, $sqlAnimals);
 
     $layout = "";
+    
+
 
     if(mysqli_num_rows($resultAnimals) > 0){
         while($rowAnimal = mysqli_fetch_assoc($resultAnimals)){
+
+            $adoptBtn = "";
+            if($rowAnimal["status"] == 0){
+                $adoptBtn = "<button href='adopt.php?x={$rowAnimal["id"]}' class='btn text-white' disabled id='upBtn'>Take me home</button>";
+            } else {
+                $adoptBtn = "<button  class='btn text-white' id='upBtn'> <a class='text-decoration-none text-white' href='adopt.php?x={$rowAnimal["id"]}'>Take me home </a> </button>";
+            }
+            
             $layout .= "<div>
             <div class='card gap-2 mt-5 mb-5 shadow align-items-center' style='width: 17rem;'>
                 <img src='../images/{$rowAnimal["picture"]}' class='card-img-top' alt='...' style='width: 100%;'>
@@ -35,7 +45,7 @@
                 <p class='card-text mb-4 ps-3'><b>Size:</b><br> {$rowAnimal["size"]} cm</p>
                 <div class='buttons text-center'> 
                     <a href='details.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Details</a>
-                    <a href='adopt.php?x={$rowAnimal["id"]}' class='btn text-white' id='upBtn'>Take me home</a>
+                    {$adoptBtn}
                 </div>
                 </div>
                 </div>
