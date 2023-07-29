@@ -18,7 +18,7 @@
 
     $row = mysqli_fetch_assoc($result);
 
-    $sqlUsers = "SELECT * FROM users WHERE status != 'adm'";
+    $sqlUsers = "SELECT * FROM users";
 
     $resultUsers = mysqli_query($connect, $sqlUsers);
 
@@ -28,7 +28,7 @@
         while($userRow = mysqli_fetch_assoc($resultUsers)){
             $layout .= "<div>
             <div class='card' style='width: 18rem;'>
-                <img src='pictures/{$userRow["picture"]}' class='card-img-top' alt='...'>
+                <img src='../images/{$userRow["picture"]}' class='card-img-top object-fit-cover' alt='user pic' width='100%' height='300'>
                 <div class='card-body'>
                 <h5 class='card-title'>{$userRow["first_name"]} {$userRow["last_name"]}</h5>
                 <p class='card-text'>{$userRow["email"]}</p>
@@ -52,7 +52,31 @@
 
 </head>
 <body>
-    <h2 class="text-center">Welcome <?= $row[ "first_name"] . " " . $row[ "last_name"] ?></h2>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home.php">
+                <img src="../images/logo.png" alt="logo" style="width: 5vw;">
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="home.php" >Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="senior.php">Our Seniors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php?logout">Logout</a >
+                </li>
+            </ul>
+            <a class="navbar-brand" href="update.php?id=<?=$row["id"]?>">
+              <span class="text-black-50 fs-6"><?= $row["email"] ?></span>
+            </a>
+            <a class="navbar-brand" href="update.php?id=<?=$row["id"]?>">
+                <img src="../images/<?= $row["picture"] ?>" class="object-fit-contain" alt="user pic" width="70" height="70">
+            </a>
+        </div>
+    </nav>
+    <h2 class="text-center">Welcome <?= $row[ "first_name"] . " " . $row[ "last_name"]?>!</h2>
     <div class="container">
         <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-xs-1">
             <?= $layout ?>

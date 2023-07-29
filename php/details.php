@@ -1,10 +1,27 @@
 <?php
+    
+    
+    session_start();
+
+    if(isset($_SESSION["adm"])){
+        header("Location: dashboard.php");
+    }
+
+    if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
+        header("Location: login.php");
+    }
+
     require_once "db_connect.php";
+
+    $sqlUser = "SELECT * FROM users WHERE id = {$_SESSION["user"]}";
+    $resultUser = mysqli_query($connect, $sqlUser);
+    $rowUser = mysqli_fetch_assoc($resultUser);
+
+
     $id = $_GET["x"];
 
     $sql = "SELECT * FROM animals WHERE id = $id";
     $result = mysqli_query($connect, $sql);
-
     $row = mysqli_fetch_assoc($result);
 
     $status = $row["status"];
@@ -29,11 +46,42 @@
 
 </head>
 <body>
-   
+<nav class="navbar navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="home.php">
+                <img src="../images/logo.png" alt="logo" style="width: 5vw;">
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 navText" >
+                <li class="nav-item ms-2 me-3">
+                    <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="home.php">Pets</a>
+                </li>-->
+                <li class="nav-item  me-3"> 
+                    <a class="nav-link" href="senior.php">Our Seniors</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php?logout">Logout</a >
+                </li>
+            </ul>
+            <a class="navbar-brand" href="update.php?id=<?=$rowUser["id"]?>">
+              <span class="text-black-50 fs-6"><?= $rowUser["email"] ?></span>
+            </a>
+            <a class="navbar-brand" href="update.php?id=<?=$rowUser["id"]?>">
+                <img src="../images/<?= $rowUser["picture"] ?>" class="object-fit-contain" alt="user pic" width="70" height="70">
+            </a>
+        </div>
+    </nav>
+
+    <div class="headerImage mb-5">
+        <p id="hero">PAWFECT <br> - MATCH -</p>
+    </div>
 
     <div class="text-center">
         <h1 >Details</h1>
-        <hr class="MLLine" style="width:10vw;">
+        <hr class="MLLine" style="width:20vw;">
     </div>
 
     <div class="d-flex flex-row justify-content-center align-items-start">
