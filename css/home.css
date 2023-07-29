@@ -16,6 +16,7 @@ body{
 .navbar {
     font-size: 1.5vw;
 }
+
 .navText {
     font-weight: 700;
     font-style: normal; 
@@ -64,8 +65,8 @@ body{
 }
 
 #foBg {
-    background-color: #44c4bd;
-    opacity: 80%;
+    background-color: gainsboro;
+    opacity: 70%;
     border-radius: 0%;
     width: 100%;
 }
@@ -74,6 +75,10 @@ body{
     margin-left: 40%;
     color: #44c4bd;
     opacity: 100%;
+}
+
+#upLine {
+    margin-left: 35%;
 }
 
 

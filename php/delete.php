@@ -11,7 +11,7 @@
         header("Location: login.php");
     }
 
-    $id = $_GET["id"];
+    $id = $_GET["x"];
 
     $sql = "SELECT * FROM products WHERE id = $id";
     $result = mysqli_query($connect, $sql);

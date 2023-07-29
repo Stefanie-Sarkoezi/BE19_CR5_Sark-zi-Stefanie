@@ -1,11 +1,5 @@
 <?php
-    
-    
     session_start();
-
-    if(isset($_SESSION["adm"])){
-        header("Location: dashboard.php");
-    }
 
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
         header("Location: login.php");
@@ -13,10 +7,15 @@
 
     require_once "db_connect.php";
 
-    $sqlUser = "SELECT * FROM users WHERE id = {$_SESSION["user"]}";
-    $resultUser = mysqli_query($connect, $sqlUser);
-    $rowUser = mysqli_fetch_assoc($resultUser);
-
+    if(isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
+        $sqlUser = "SELECT * FROM users WHERE id = {$_SESSION["user"]}";
+        $resultUser = mysqli_query($connect, $sqlUser);
+        $rowUser = mysqli_fetch_assoc($resultUser);
+    }elseif(!isset($_SESSION["user"]) && isset($_SESSION["adm"])) {
+        $sqlUser = "SELECT * FROM users WHERE id = {$_SESSION["adm"]}";
+        $resultUser = mysqli_query($connect, $sqlUser);
+        $rowUser = mysqli_fetch_assoc($resultUser);
+    }
 
     $id = $_GET["x"];
 
@@ -79,27 +78,47 @@
         <p id="hero">PAWFECT <br> - MATCH -</p>
     </div>
 
-    <div class="text-center">
-        <h1 >Details</h1>
+    <div class="text-center" >
+        <h1 id="welcome">Details</h1>
         <hr class="MLLine" style="width:20vw;">
     </div>
 
     <div class="d-flex flex-row justify-content-center align-items-start">
         <div><img src="../images/<?= $row["picture"] ?>" width="700vw"></div>
         <div class="w-50">
-            <div class="mb-3"><b>Name:</b> <br> <?= $row["name"] ?></div>
-            <div class="mb-3"><b>Address:</b> <br><?= $row["address"]?></div>
-            <div class="mb-3"><b>Age:</b> <br><?= $row["age"]?></div>
-            <div class="mb-3"><b>Size:</b> <br><?= $row["size"]?> cm</div>
-            <div class="mb-3"><b>Vaccinated:</b> <br><?= $row["vaccinated"] ?></div>
-            <div class="mb-3"><b>Breed:</b> <br><?= $row["breed"] ?></div>
+            <div class="mb-3"><b id="txSize">Name:</b> <br> <?= $row["name"] ?></div>
+            <div class="mb-3"><b id="txSize">Address:</b> <br><?= $row["address"]?></div>
+            <div class="mb-3"><b id="txSize">Age:</b> <br><?= $row["age"]?></div>
+            <div class="mb-3"><b id="txSize">Size:</b> <br><?= $row["size"]?> cm</div>
+            <div class="mb-3"><b id="txSize">Vaccinated:</b> <br><?= $row["vaccinated"] ?></div>
+            <div class="mb-3"><b id="txSize">Breed:</b> <br><?= $row["breed"] ?></div>
             <div >
-                <b>Status:</b> 
+                <b id="txSize">Status:</b> 
                 <span class="<?php echo $colorClass; ?>"> <?php echo $message; ?> </span>
             </div>
         </div>
-        <div class="w-100"> <b id="description">Description:</b> <br> <br> <?= $row["description"] ?></div>   
+        <div class="w-100"> <b id="txSize">Description:</b> <br>  <?= $row["description"] ?></div>
+           
     </div>
+
+    <footer>
+        <div class="card text-center" id="foBg">
+            <div class="card-header p-3">
+                <a class="btn btn-dark p-1 m-1" style="width: 3%;" href="#" role="button"><img src="../images/Facebook.png" width="40%" class="m-1"></a>
+                <a class="btn btn-dark p-1 m-1" style="width: 3%;" href="#" role="button"><img src="../images/twitter.png" width="90%" class="m-1"></a>
+                <a class="btn btn-dark p-1 m-1" style="width: 3%;" href="#" role="button"><img src="../images/instagram.png" width="75%"  class="m-1"></a>
+                <a class="btn btn-dark p-1 m-1" style="width: 3%;" href="#" role="button"><img src="../images/google.png" width="75%"  class="m-1"></a>
+            </div>
+            <span class="card-body input-group input-group-sm  mx-auto p-3" style="width: 40%;" >
+                <span class="input-group-text bg-black border-black text-white">Sign up for our newsletter</span>
+                <input type="text" name="email" autocomplete="email" class="form-control bg-black border-black" placeholder="example@gmail.com">
+                <button class=" btn rounded-end bg-black text-white" type="button" id="button-addon1"> Subscripe</button>
+            </span>
+            <div class="card-footer text-body-secondary p-1">
+                &copy; Stefanie Sarközi
+            </div>
+        </div>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

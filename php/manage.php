@@ -2,8 +2,8 @@
 
     session_start();
 
-    if(isset($_SESSION["adm"])){
-        header("Location: dashboard.php");
+    if(isset($_SESSION["user"])){
+        header("Location: home.php");
     }
 
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
@@ -12,7 +12,7 @@
 
     require_once "db_connect.php";
 
-    $sql = "SELECT * FROM users WHERE id = {$_SESSION["user"]}";
+    $sql = "SELECT * FROM users WHERE id = {$_SESSION["adm"]}";
 
     $result = mysqli_query($connect, $sql);
 
@@ -35,7 +35,8 @@
                 <p class='card-text mb-4 ps-3'><b>Size:</b><br> {$rowAnimal["size"]} cm</p>
                 <div class='buttons text-center'> 
                     <a href='details.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Details</a>
-                    <a href='adopt.php?x={$rowAnimal["id"]}' class='btn text-white' id='upBtn'>Take me home</a>
+                    <a href='edit.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Edit</a>
+                    <a href='delete.php?x={$rowAnimal["id"]}' class='btn btn-dark'>Delete</a>
                 </div>
                 </div>
                 </div>
@@ -58,7 +59,7 @@
 
 </head>
 <body>
-   <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
         <div class="container-fluid">
             <a class="navbar-brand" href="home.php">
                 <img src="../images/logo.png" alt="logo" style="width: 5vw;">
@@ -73,7 +74,12 @@
                 <li class="nav-item  me-3"> 
                     <a class="nav-link" href="senior.php">Our Seniors</a>
                 </li>
-                
+                <li class="nav-item  me-3"> 
+                    <a class="nav-link" href="manage.php">Admin</a>
+                </li>
+                <li class="nav-item  me-3"> 
+                    <a class="nav-link" href="create.php">Create</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php?logout">Logout</a >
                 </li>
@@ -86,13 +92,12 @@
             </a>
         </div>
     </nav>
-
     <div class="headerImage mb-5">
         <p id="hero">PAWFECT <br> - MATCH -</p>
     </div>
 
     <div class="text-center">
-        <h2 class="text-center mt-5" id="welcome">Welcome <?= $row["first_name"]?>!</h2>
+        <h2 class="text-center mt-5" id="welcome">Manage:</h2>
         <hr class="MLLine" style="width:20vw;">
     </div>
 
