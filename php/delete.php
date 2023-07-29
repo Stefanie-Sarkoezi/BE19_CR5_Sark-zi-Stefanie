@@ -13,7 +13,7 @@
 
     $id = $_GET["x"];
 
-    $sql = "SELECT * FROM products WHERE id = $id";
+    $sql = "SELECT * FROM animals WHERE id = $id";
     $result = mysqli_query($connect, $sql);
     $row = mysqli_fetch_assoc($result);
     if($row["picture"] != "pet-avatar.png"){
@@ -22,7 +22,7 @@
 
     $delete = "DELETE FROM `animals` WHERE id = $id";
     if(mysqli_query($connect, $delete)){
-        header("Location: index.php");
+        header("Location: manage.php");
     }else {
-        echo "error";
+        echo "Oops! Something went wrong!";
     }

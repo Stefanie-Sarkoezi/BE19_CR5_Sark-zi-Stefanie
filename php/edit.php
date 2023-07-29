@@ -42,9 +42,9 @@
         }
         if(mysqli_query($connect, $sql)){
             echo "<div class='alert alert-success' role='alert'>
-                    Entry has been updated, {$picture[1]}
+                    Entry has been updated. {$picture[1]}
                 </div>";
-                header("refresh: 5; url = index.php");
+                header("refresh: 3; url = manage.php");
         }else {
             echo "<div class='alert alert-danger' role='alert'>
                 Oops! Something went wrong. {$picture[1]}

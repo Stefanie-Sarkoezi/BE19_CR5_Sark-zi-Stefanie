@@ -11,6 +11,7 @@
     if(!isset($_SESSION["user"]) && !isset($_SESSION["adm"])){
         header("Location: login.php");
     }
+
     $sqlUsers = "SELECT * FROM users";
     $resultUsers = mysqli_query($connect, $sqlUsers);
     $rowUser = mysqli_fetch_assoc($resultUsers);
@@ -27,13 +28,13 @@
         $status = $_POST["status"];
         $picture = fileUpload($_FILES["picture"], "animal");
 
-        $sql = "INSERT INTO `animals`( `name`, `address`, `description`, `size`, `age`, `vaccinated`, `breed`, `status`, `picture`) VALUES ('$name',$address, '$description', '$size','$age','$vaccinated','$breed','$status','$picture[0]')";
+        $sql = "INSERT INTO `animals`(`name`, `address`, `description`, `size`, `age`, `vaccinated`, `breed`, `status`, `picture`) VALUES ('$name','$address', '$description', '$size','$age','$vaccinated','$breed','$status','{$picture[0]}')";
 
         if(mysqli_query($connect, $sql)){
             echo "<div class='alert alert-success' role='alert'>
             New entry has been created. {$picture[1]}
                 </div>";
-                header("refresh: 5; url = index.php");
+                header("refresh: 3; url = manage.php");
         }else {
             echo "<div class='alert alert-danger' role='alert'>
                 Oops! Something went wrong. {$picture[1]}
@@ -107,11 +108,11 @@
             </div>
             <div class="mb-4">
                 <label for="size" class="form-label">Size:</label>
-                <input type="text" class="form-control"  id="size"  aria-describedby="size"  placeholder="Size in cm" name="size">
+                <input type="number" class="form-control"  id="size"  aria-describedby="size"  placeholder="Size in cm" name="size">
             </div>
             <div class="mb-4">
                 <label for="age" class="form-label">Age:</label>
-                <input type="text" class="form-control"  id="age"  aria-describedby="age"  placeholder="Age in years" name="age">
+                <input type="number" class="form-control"  id="age"  aria-describedby="age"  placeholder="Age in years" name="age">
             </div>
             <div class="mb-4">
                 <label for="vaccinated" class="form-label">Vaccinated:</label>
