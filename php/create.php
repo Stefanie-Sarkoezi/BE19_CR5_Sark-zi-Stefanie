@@ -99,7 +99,7 @@
             </div>
             <div class="mb-4">
                 <label for="address" class="form-label">Address:</label>
-                <input type="text" class="form-control"  id="address"  aria-describedby="address"  name="address">
+                <input type="text" class="form-control"  id="address"  aria-describedby="address" placeholder="E.g. Praterstraße 34, 1020 Vienna" name="address">
             </div>
             <div class="mb-4">
                 <label for="description" class="form-label">Description:</label>
@@ -107,11 +107,11 @@
             </div>
             <div class="mb-4">
                 <label for="size" class="form-label">Size:</label>
-                <input type="text" class="form-control"  id="size"  aria-describedby="size"  name="size">
+                <input type="text" class="form-control"  id="size"  aria-describedby="size"  placeholder="Size in cm" name="size">
             </div>
             <div class="mb-4">
                 <label for="age" class="form-label">Age:</label>
-                <input type="text" class="form-control"  id="age"  aria-describedby="age"  name="age">
+                <input type="text" class="form-control"  id="age"  aria-describedby="age"  placeholder="Age in years" name="age">
             </div>
             <div class="mb-4">
                 <label for="vaccinated" class="form-label">Vaccinated:</label>
@@ -123,13 +123,13 @@
             </div>
             <div class="mb-4">
                 <label for="status" class="form-label">Status:</label>
-                <input type="number" class="form-control"  id="status"  aria-describedby="status"  name="status">
+                <input type="number" class="form-control"  id="status"  aria-describedby="status"  placeholder="Choose 0 for adopted and 1 for available " name="status">
             </div>
            <div class="mb-4">
                 <label for="picture" class="form-label">Picture:</label>
                 <input type = "file" class="form-control" id="picture" aria-describedby="picture"   name="picture">
             </div>
-            <button name="create" type="submit" class="btn text-white mb-5 mt-4" id="upBtn">Create Entry</button>
+            <button name="create" type="submit" class="btn text-white mb-5 mt-4 me-3" id="upBtn">Create Entry</button>
             <a href="dashboard.php" class="btn btn-dark mb-5 mt-4">Back to Dashboard</a>
         </form>
     </div>

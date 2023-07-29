@@ -28,7 +28,7 @@
         $message = "Available";
         $colorClass = "green-text";
     }else {
-        $message = "Reserved";
+        $message = "Adopted";
         $colorClass = "red-text";
     }
 
@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="w-100"> <b id="txSize">Description:</b> <br>  <?= $row["description"] ?></div>
-           
+
     </div>
 
     <footer>
