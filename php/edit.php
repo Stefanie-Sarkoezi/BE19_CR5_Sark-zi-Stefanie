@@ -36,13 +36,14 @@
             if($row["picture"] != "pet-avatar.png"){
                 unlink("../images/$row[picture]");
             }
-            $sql = "UPDATE `animals` SET `name`='$name',`address`='$address', `description`='$description', `size`='$size', `age`='$age', `vaccinated`='$vaccinated', `breed`='$breed', `status`='$status',`picture`='$picture[0]' WHERE id = $id";
+            $sql = "UPDATE `animals` SET `name`='$name', `address`='$address', `description`='$description', `size`='$size', `age`='$age', `vaccinated`='$vaccinated', `breed`='$breed', `status`='$status',`picture`='{$picture[0]}' WHERE id = $id";
         }else {
-            $sql = "UPDATE `animals` SET `name`='$name',`address`= '$address', `description`='$description', `size`='$size', `age`='$age', `vaccinated`='$vaccinated', `breed`='$breed', `status`='$status'  WHERE id = $id";
+            $sql = "UPDATE `animals` SET `name` = '$name', `address`= '$address', `description`='$description', `size`='$size', `age`='$age', `vaccinated`='$vaccinated', `breed`='$breed', `status`='$status'  WHERE id = $id";
         }
+        
         if(mysqli_query($connect, $sql)){
             echo "<div class='alert alert-success' role='alert'>
-                    Entry has been updated. {$picture[1]}
+                Entry has been updated. {$picture[1]}
                 </div>";
                 header("refresh: 3; url = manage.php");
         }else {
@@ -113,7 +114,7 @@
             </div>
             <div class="mb-4">
                 <label for="description" class="form-label">Description:</label>
-                <textarea type="text" style="height: 20vh;" class="form-control"  id="description"  aria-describedby="description"  name="description"><?= $row["description"] ?></textarea>
+                <textarea type="text" style="height: 20vh;" class="form-control"  id="description"  aria-describedby="description"  name="description"><?= $row['description']?></textarea>
             </div>
             <div class="mb-4">
                 <label for="size" class="form-label">Size:</label>
